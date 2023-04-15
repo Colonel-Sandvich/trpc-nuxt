@@ -57,6 +57,14 @@ type DecorateProcedure<
      >(
         input: inferProcedureInput<TProcedure>,
         opts?: AsyncDataOptions<TData, Transform, PickKeys> & { trpc?: TRPCRequestOptions },
+      ) => AsyncData<PickFrom<ReturnType<Transform>, PickKeys>, TRPCClientErrorLike<TProcedure>>, 
+      useLazyQuery: <
+      TData = inferTransformedProcedureOutput<TProcedure>,
+      Transform extends _Transform<TData> = _Transform<TData, TData>,
+      PickKeys extends KeyOfRes<Transform> = KeyOfRes<Transform>,
+     >(
+        input: inferProcedureInput<TProcedure>,
+        opts?: Omit<AsyncDataOptions<TData, Transform, PickKeys> & { trpc?: TRPCRequestOptions }, "lazy">,
       ) => AsyncData<PickFrom<ReturnType<Transform>, PickKeys>, TRPCClientErrorLike<TProcedure>>,
       query: Resolver<TProcedure>
     } : TProcedure extends AnyMutationProcedure ? {

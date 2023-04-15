@@ -40,6 +40,12 @@ const { data: todos, pending, error, refresh } = await $client.todo.getTodos.use
           >
             Title: {{ t.title }}
           </NuxtLink>
+          <NuxtLink
+            :class="{ completed: t.completed }"
+            :to="`/todo/lazy-${t.id}`"
+          >
+            Load me lazily
+          </NuxtLink>
         </li>
       </ul>
       <button @click="addTodo">
